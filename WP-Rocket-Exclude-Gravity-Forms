@@ -1,0 +1,36 @@
+namespace WP_Rocket\Helpers\cache\no_cache_content_shortcodes;
+
+// Standard plugin security, keep this line in place.
+defined( 'ABSPATH' ) or die();
+
+
+function never_cache_urls_shortcode() {
+	
+	//you can enable this error log if needed
+//error_log( "\n" . date('Y-m-d H:i:s', $_SERVER['REQUEST_TIME']) . "] page_id: " . print_r($page_id, true), 3, ABSPATH . "wpr.log" );
+ 
+
+	if(has_gform()) {
+		
+		define( 'DONOTCACHEPAGE', true );
+		define( 'DONOTROCKETOPTIMIZE', true );
+		
+	}
+}
+
+add_action( 'wp', __NAMESPACE__ . '\never_cache_urls_shortcode' );
+
+
+// search for custom string in the post content
+
+function has_gform() {
+     global $post;
+     $all_content = get_the_content();
+     
+     // you can edit the '[gravityform' string if you'd like to match something different.
+     if (strpos($all_content, 'wp:gravityforms') !== false || strpos($all_content, '[gravityform') !== false) {
+	 	return true;
+     } else {
+	 	return false;
+     }
+}
