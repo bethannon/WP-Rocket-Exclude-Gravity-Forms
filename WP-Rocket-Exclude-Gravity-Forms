@@ -1,3 +1,5 @@
+//There are no guarantees or support provided with this snippet. Use at your own risk!
+
 namespace WP_Rocket\Helpers\cache\no_cache_content_shortcodes;
 
 // Standard plugin security, keep this line in place.
